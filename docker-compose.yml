@@ -1,0 +1,74 @@
+# ==============================================================================
+# Orquestación con Docker Compose - Entrega Proyecto 1 (Escenario 3)
+# Institución Universitaria Politécnico Grancolombiano
+# Estudiante: Ronaldo Andrés Bautista Ruiz
+# ==============================================================================
+
+services:
+  # ----------------------------------------------------------------------------
+  # Contenedor 1: Aplicación Web / API REST (Flask)
+  # ----------------------------------------------------------------------------
+  app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    container_name: app_service
+    restart: unless-stopped
+    ports:
+      - "${APP_PORT:-5000}:5000"
+    environment:
+      # COMUNICACIÓN INTER-CONTENEDORES (Punto 5 de la rúbrica):
+      # Se usa el NOMBRE DEL SERVICIO 'db' dentro de la red Docker.
+      # Docker resuelve 'db' hacia la IP privada del contenedor mediante su DNS interno.
+      - DB_HOST=db
+      - DB_PORT=${DB_PORT:-5432}
+      - DB_NAME=${DB_NAME:-proyectodb}
+      - DB_USER=${DB_USER:-postgres_user}
+      - DB_PASSWORD=${DB_PASSWORD:-postgres_password_segura}
+      - APP_PORT=5000
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - red_interna
+
+  # ----------------------------------------------------------------------------
+  # Contenedor 2: Servicio de Base de Datos (PostgreSQL)
+  # Imagen oficial con versión fija y volumen persistente (Requisito 3)
+  # ----------------------------------------------------------------------------
+  db:
+    image: postgres:16-alpine
+    container_name: db_service
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_NAME:-proyectodb}
+      POSTGRES_USER: ${DB_USER:-postgres_user}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres_password_segura}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "${DB_EXTERNAL_PORT:-5432}:5432"
+    networks:
+      - red_interna
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-postgres_user} -d ${DB_NAME:-proyectodb}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+# ------------------------------------------------------------------------------
+# Red Propia Aislada (Driver Bridge)
+# ------------------------------------------------------------------------------
+networks:
+  red_interna:
+    name: red_interna_proyecto
+    driver: bridge
+
+# ------------------------------------------------------------------------------
+# Volumen Persistente
+# ------------------------------------------------------------------------------
+volumes:
+  db_data:
+    name: db_data_volumen
+    driver: local
