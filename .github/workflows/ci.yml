@@ -8,31 +8,31 @@ on:
 
 jobs:
   docker-ci:
-    name: Build, Orquestación y Prueba de Comunicación
+    name: "Build, Orquestación y Prueba de Comunicación"
     runs-on: ubuntu-latest
 
     steps:
-      - name: 1. Clonar el repositorio
+      - name: "1. Clonar el repositorio"
         uses: actions/checkout@v4
 
-      - name: 2. Configurar variables de entorno desde .env.example
+      - name: "2. Configurar variables de entorno desde .env.example"
         run: |
           echo "Creando archivo .env a partir de .env.example..."
           cp .env.example .env
 
-      - name: 3. Validar sintaxis y configuración de Docker Compose
+      - name: "3. Validar sintaxis y configuración de Docker Compose"
         run: |
           docker compose config
 
-      - name: 4. Construir la imagen del Contenedor 1 (Aplicación)
+      - name: "4. Construir la imagen del Contenedor 1 (Aplicación)"
         run: |
           docker compose build --no-cache
 
-      - name: 5. Levantar los dos contenedores en la red bridge
+      - name: "5. Levantar los dos contenedores en la red bridge"
         run: |
           docker compose up -d
 
-      - name: 6. Esperar a que los servicios completen el Healthcheck
+      - name: "6. Esperar a que los servicios completen el Healthcheck"
         run: |
           echo "Esperando que el Contenedor 2 (db) y Contenedor 1 (app) estén listos..."
           for i in {1..30}; do
@@ -45,16 +45,16 @@ jobs:
             sleep 2
           done
 
-      - name: 7. Verificar estado de los contenedores (docker ps)
+      - name: "7. Verificar estado de los contenedores (docker ps)"
         run: |
           docker compose ps
 
-      - name: 8. Inspeccionar la red de Docker (docker network inspect)
+      - name: "8. Inspeccionar la red de Docker (docker network inspect)"
         run: |
           echo "=== Inspección de la red aislada red_interna_proyecto ==="
           docker network inspect red_interna_proyecto
 
-      - name: 9. Probar comunicación inter-contenedor por nombre de servicio 'db' (GET /api/health)
+      - name: "9. Probar comunicación inter-contenedor por nombre de servicio 'db' (GET /api/health)"
         run: |
           echo "=== Healthcheck y Resolución DNS ==="
           HEALTH=$(curl -s -f http://localhost:5000/api/health)
@@ -67,7 +67,7 @@ jobs:
             exit 1
           fi
 
-      - name: 10. Demostración real de comunicación de ida y vuelta: Operación de Escritura (POST)
+      - name: "10. Demostración real de comunicación de ida y vuelta: Operación de Escritura (POST)"
         run: |
           echo "=== Operación de Escritura (POST) ==="
           POST_RESPONSE=$(curl -s -X POST http://localhost:5000/api/items \
@@ -75,7 +75,7 @@ jobs:
             -d '{"titulo": "Registro desde CI GitHub Actions", "descripcion": "Validando persistencia y comunicacion inter-contenedor con servicio db"}')
           echo "$POST_RESPONSE" | jq .
 
-      - name: 11. Demostración real de comunicación de ida y vuelta: Operación de Lectura (GET)
+      - name: "11. Demostración real de comunicación de ida y vuelta: Operación de Lectura (GET)"
         run: |
           echo "=== Operación de Lectura (GET) ==="
           GET_RESPONSE=$(curl -s -f http://localhost:5000/api/items)
@@ -88,7 +88,7 @@ jobs:
           fi
           echo "Prueba de ida y vuelta COMPLETADA EXITOSAMENTE."
 
-      - name: 12. Apagar y limpiar contenedores y volúmenes
+      - name: "12. Apagar y limpiar contenedores y volúmenes"
         if: always()
         run: |
           docker compose down -v
