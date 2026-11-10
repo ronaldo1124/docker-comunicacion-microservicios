@@ -56,7 +56,7 @@ class NumberedCanvas(canvas.Canvas):
         # Pie de página
         self.setFont("Helvetica", 8)
         self.setFillColor(colors.HexColor("#718096"))
-        self.drawString(54, 34, "Estudiante: Ronaldo Andrés Bautista Ruiz | Repositorio GitHub: github.com/ronaldo1124")
+        self.drawString(54, 34, "Equipo: S. Salazar, S. Quintana, R. Bautista | GitHub: github.com/ronaldo1124")
         report_page = self._pageNumber - 1
         total_report_pages = total_pages - 1
         self.drawRightString(558, 34, f"Página {report_page} de {total_report_pages}")
@@ -266,11 +266,13 @@ def build_pdf(filename="Informe_Proyecto1_Docker_Escenario3.pdf"):
     story.append(Paragraph("Entrega Proyecto 1 - Escenario 3 (Evaluación sobre 150 Puntos)", subtitle_cover_style))
     story.append(HRFlowable(width="80%", thickness=1, color=c_secondary, spaceBefore=20, spaceAfter=0))
 
-    story.append(Spacer(1, 90))
+    story.append(Spacer(1, 50))
 
     cover_meta = """
-    <b>Autor / Estudiante:</b> Ronaldo Andrés Bautista Ruiz<br/>
-    <b>Código / Correo:</b> ronaldo.bautistar@outlook.com<br/>
+    <b>Integrantes del Equipo:</b><br/>
+    • <b>Sebastián Salazar Urrego</b> — ssalazaru@poligran.edu.co<br/>
+    • <b>Santiago Quintana Alvarado</b> — squintana@poligran.edu.co<br/>
+    • <b>Ronaldo Andrés Bautista Ruiz</b> — ranbautista@poligran.edu.co<br/><br/>
     <b>Repositorio Oficial de GitHub:</b><br/>
     <font color='#2B6CB0'><u>https://github.com/ronaldo1124/docker-comunicacion-microservicios</u></font><br/><br/>
     <b>Fecha de Presentación:</b> 10 de noviembre de 2026<br/>

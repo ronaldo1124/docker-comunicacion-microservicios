@@ -59,13 +59,15 @@ def create_word_report(output_filename="E:\\trabajosuni\\Informe_Proyecto1_Docke
     r_sub.font.bold = True
     r_sub.font.color.rgb = c_secondary
 
-    doc.add_paragraph("\n\n\n")
+    doc.add_paragraph("\n\n")
 
     p_meta = doc.add_paragraph()
     p_meta.alignment = WD_ALIGN_PARAGRAPH.CENTER
     r_meta = p_meta.add_run(
-        "Estudiante: Ronaldo Andrés Bautista Ruiz\n"
-        "Correo: ronaldo.bautistar@outlook.com\n\n"
+        "Integrantes del Equipo:\n"
+        "• Sebastián Salazar Urrego (ssalazaru@poligran.edu.co)\n"
+        "• Santiago Quintana Alvarado (squintana@poligran.edu.co)\n"
+        "• Ronaldo Andrés Bautista Ruiz (ranbautista@poligran.edu.co)\n\n"
         "Repositorio Oficial en GitHub:\n"
         "https://github.com/ronaldo1124/docker-comunicacion-microservicios\n\n"
         "Fecha de Entrega: 10 de noviembre de 2026\n"

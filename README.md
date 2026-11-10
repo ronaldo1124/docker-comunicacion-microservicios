@@ -10,7 +10,10 @@
 > **Institución Universitaria Politécnico Grancolombiano**  
 > **Facultad de Ingeniería, Diseño e Innovación**  
 > **Módulo:** Integración Continua y DevOps  
-> **Estudiante:** Ronaldo Andrés Bautista Ruiz  
+> **Integrantes:**  
+> - Sebastián Salazar Urrego (`ssalazaru@poligran.edu.co`)  
+> - Santiago Quintana Alvarado (`squintana@poligran.edu.co`)  
+> - Ronaldo Andrés Bautista Ruiz (`ranbautista@poligran.edu.co`)  
 > **Entrega:** Proyecto 1 - Escenario 3 (150 Puntos)  
 
 ---
@@ -289,9 +292,10 @@ El pipeline realiza de forma desatendida:
 
 ---
 
-## 👨‍💻 Autor
-* **Nombre:** Ronaldo Andrés Bautista Ruiz
-* **Programa:** Ingeniería de Sistemas - 8.° Semestre
+## 👨‍💻 Integrantes del Equipo
+* **Sebastián Salazar Urrego** — `ssalazaru@poligran.edu.co`
+* **Santiago Quintana Alvarado** — `squintana@poligran.edu.co`
+* **Ronaldo Andrés Bautista Ruiz** — `ranbautista@poligran.edu.co` | GitHub: [@ronaldo1124](https://github.com/ronaldo1124)
+
+* **Programa:** Ingeniería de Sistemas
 * **Institución:** Institución Universitaria Politécnico Grancolombiano
-* **Correo institucional / contacto:** ronaldo.bautistar@outlook.com
-* **GitHub:** [@ronaldo1124](https://github.com/ronaldo1124)
