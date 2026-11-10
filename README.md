@@ -14,7 +14,7 @@
 > - Sebastián Salazar Urrego (`ssalazaru@poligran.edu.co`)  
 > - Santiago Quintana Alvarado (`squintana@poligran.edu.co`)  
 > - Ronaldo Andrés Bautista Ruiz (`ranbautista@poligran.edu.co`)  
-> **Entrega:** Proyecto 1 - Escenario 3 (150 Puntos)  
+> **Entrega:** Proyecto 1 - Escenario 3  
 
 ---
 
@@ -25,11 +25,11 @@
 - [Detalle de los Contenedores](#-detalle-de-los-contenedores)
   - [Contenedor 1: Aplicación Web / API (app)](#contenedor-1-aplicación-web--api-app)
   - [Contenedor 2: Base de Datos Relacional (db)](#contenedor-2-base-de-datos-relacional-db)
-- [Comunicación Inter-Contenedores (Criterio Central - 35 pts)](#-comunicación-inter-contenedores-criterio-central---35-pts)
-- [Buenas Prácticas y Seguridad (15 pts)](#-buenas-prácticas-y-seguridad-15-pts)
+- [Comunicación Inter-Contenedores (Criterio Central)](#-comunicación-inter-contenedores-criterio-central)
+- [Buenas Prácticas y Seguridad](#-buenas-prácticas-y-seguridad)
 - [Guía de Puesta en Marcha (Paso a Paso)](#-guía-de-puesta-en-marcha-paso-a-paso)
 - [Comprobación de la Comunicación (Ida y Vuelta)](#-comprobación-de-la-comunicación-ida-y-vuelta)
-- [Pipeline de CI con GitHub Actions (15 pts)](#-pipeline-de-ci-con-github-actions-15-pts)
+- [Pipeline de CI con GitHub Actions](#-pipeline-de-ci-con-github-actions)
 - [Comandos Útiles de Docker](#-comandos-útiles-de-docker)
 
 ---
@@ -125,7 +125,7 @@ docker-comunicacion-microservicios/
 
 ---
 
-## 🌐 Comunicación Inter-Contenedores (Criterio Central - 35 pts)
+## 🌐 Comunicación Inter-Contenedores (Criterio Central)
 
 El requerimiento central exige que el **Contenedor 1** se comunique con el **Contenedor 2** utilizando el **nombre de servicio** (`db`) definido en el archivo `docker-compose.yml`.
 
@@ -137,7 +137,7 @@ El requerimiento central exige que el **Contenedor 1** se comunique con el **Con
 
 ---
 
-## 🔒 Buenas Prácticas y Seguridad (15 pts)
+## 🔒 Buenas Prácticas y Seguridad
 
 1. **Gestión de Secretos:**
    - Se incluye un archivo `.env.example` en el repositorio con credenciales de muestra.
@@ -262,7 +262,7 @@ Para validar que el volumen `db_data` retiene la información tras destruir los 
 
 ---
 
-## ⚙️ Pipeline de CI con GitHub Actions (15 pts)
+## ⚙️ Pipeline de CI con GitHub Actions
 
 El archivo [`.github/workflows/ci.yml`](.github/workflows/ci.yml) se ejecuta automáticamente en cada `push` o `pull_request` a la rama principal.
 

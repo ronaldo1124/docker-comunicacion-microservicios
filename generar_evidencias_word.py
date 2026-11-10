@@ -53,7 +53,7 @@ def create_word_report(output_filename="E:\\trabajosuni\\Informe_Proyecto1_Docke
 
     p_sub = doc.add_paragraph()
     p_sub.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    r_sub = p_sub.add_run("Entrega Proyecto 1 - Escenario 3 (150 Puntos)")
+    r_sub = p_sub.add_run("Entrega Proyecto 1 - Escenario 3")
     r_sub.font.name = "Arial"
     r_sub.font.size = Pt(13)
     r_sub.font.bold = True
@@ -98,7 +98,7 @@ def create_word_report(output_filename="E:\\trabajosuni\\Informe_Proyecto1_Docke
     doc.add_paragraph("• Contenedor 1 (Aplicación Web Flask): Dockerfile propio con versión fija python:3.11-slim, usuario non-root y puerto expuesto 5000.", style='List Bullet')
     doc.add_paragraph("• Contenedor 2 (Base de Datos PostgreSQL): Imagen oficial postgres:16-alpine, variables de entorno y volumen persistente db_data.", style='List Bullet')
     doc.add_paragraph("• Orquestación con Docker Compose: Archivo docker-compose.yml con red bridge personalizada, puertos, variables y healthcheck.", style='List Bullet')
-    doc.add_paragraph("• Comunicación Inter-Contenedores (35 pts): Validación de resolución DNS interna y prueba de ida y vuelta (POST y GET).", style='List Bullet')
+    doc.add_paragraph("• Comunicación Inter-Contenedores: Validación de resolución DNS interna y prueba de ida y vuelta (POST y GET).", style='List Bullet')
     doc.add_paragraph("• Buenas Prácticas y Seguridad: Uso de .dockerignore, plantilla .env.example, exclusión de secretos en .gitignore y código limpio.", style='List Bullet')
     doc.add_paragraph("• Pipeline de Integración Continua: Pipeline automatizado en GitHub Actions con check en verde.", style='List Bullet')
 
@@ -145,9 +145,9 @@ def create_word_report(output_filename="E:\\trabajosuni\\Informe_Proyecto1_Docke
     doc.add_page_break()
 
     # 4. COMUNICACIÓN Y RESOLUCIÓN DNS
-    doc.add_heading(level=1).add_run("3. Comunicación Inter-Contenedores y DNS Interno (35 pts)").font.color.rgb = c_primary
+    doc.add_heading(level=1).add_run("3. Comunicación Inter-Contenedores y DNS Interno (Criterio Central)").font.color.rgb = c_primary
     p_dns_exp = doc.add_paragraph(
-        "Uno de los puntos más críticos de la evaluación consiste en evitar el uso de 'localhost' o una dirección IP fija. "
+        "Uno de los aspectos más críticos de la evaluación consiste en evitar el uso de 'localhost' o una dirección IP fija. "
         "En entornos de contenedores, 'localhost' apunta exclusivamente a la interfaz de loopback local del propio contenedor emisor; "
         "por tanto, si la aplicación intentara conectarse a 'localhost:5432', el intento fallaría de inmediato. Por otra parte, una IP fija "
         "es una mala práctica debido a la naturaleza dinámica y efímera de los contenedores en despliegues reales.\n\n"
@@ -260,14 +260,14 @@ def create_word_report(output_filename="E:\\trabajosuni\\Informe_Proyecto1_Docke
     doc.add_page_break()
 
     # 6. BUENAS PRÁCTICAS Y SEGURIDAD
-    doc.add_heading(level=1).add_run("5. Buenas Prácticas y Seguridad (15 pts)").font.color.rgb = c_primary
+    doc.add_heading(level=1).add_run("5. Buenas Prácticas y Seguridad").font.color.rgb = c_primary
     doc.add_paragraph("• Aislamiento estricto de secretos (.env y .env.example): Ningún secreto o contraseña sensible está incrustado en el código fuente. El archivo .env real está excluido mediante .gitignore.", style='List Bullet')
     doc.add_paragraph("• Contexto de construcción eficiente (.dockerignore): Se excluyen dependencias locales, entornos virtuales, logs y archivos temporales.", style='List Bullet')
     doc.add_paragraph("• Principio de menor privilegio: El contenedor de la aplicación se ejecuta con el usuario no-root 'appuser' perteneciente al grupo 'appgroup'.", style='List Bullet')
     doc.add_paragraph("• Determinismo de imágenes: Se fijaron las versiones oficiales python:3.11-slim y postgres:16-alpine, descartando 'latest'.", style='List Bullet')
 
     # 7. CI/CD EN GITHUB ACTIONS
-    doc.add_heading(level=1).add_run("6. Pipeline de Integración Continua (15 pts)").font.color.rgb = c_primary
+    doc.add_heading(level=1).add_run("6. Pipeline de Integración Continua").font.color.rgb = c_primary
     p_ci = doc.add_paragraph(
         "Se implementó un pipeline automatizado en GitHub Actions (.github/workflows/ci.yml) que valida cada cambio en el repositorio. "
         "En cada push o pull request, el pipeline clona el código, genera el archivo de entorno, valida la sintaxis de docker-compose.yml, "
@@ -279,27 +279,27 @@ def create_word_report(output_filename="E:\\trabajosuni\\Informe_Proyecto1_Docke
     doc.add_page_break()
 
     # 7. MATRIZ DE AUDITORÍA Y NOTAS DE REQUISITOS (QUÉ FALTABA Y SOLUCIÓN)
-    doc.add_heading(level=1).add_run("7. Matriz de Auditoría: Qué Faltaba en Repo Base y Solución Implementada (150 pts)").font.color.rgb = c_primary
+    doc.add_heading(level=1).add_run("7. Matriz de Auditoría Técnica y Cumplimiento de Requisitos").font.color.rgb = c_primary
     p_audit_desc = doc.add_paragraph(
         "A continuación se presenta el balance técnico de auditoría realizado entre el repositorio base inicial "
         "(proyecto-integracion-continua) y la implementación final entregada (docker-comunicacion-microservicios). "
-        "El proyecto base presentaba omisiones críticas que habrían limitado la calificación a nivel Básico (~80/150 pts), "
-        "las cuales fueron subsanadas en su totalidad para alcanzar el 100% de la rúbrica (150/150 pts - Nivel Excelente):"
+        "El proyecto base presentaba omisiones críticas que habrían limitado la entrega a un nivel básico preliminar, "
+        "las cuales fueron subsanadas en su totalidad para alcanzar un nivel de implementación excelente y completo:"
     )
     p_audit_desc.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
 
     # Tabla de Auditoría
     audit_data = [
-        ("Criterio y Ponderación", "Estado en Repo Base (Qué Faltaba)", "Solución Implementada en Repo Final", "Calificación"),
-        ("1. Repositorio GitHub (15 pts)", "Faltaban comandos independientes de build/run, descripción de variables y commits frecuentes atómicos.", "README exhaustivo de 297 líneas con diagramas, badges, guía paso a paso y 9+ commits semánticos atómicos.", "15 / 15 (Excelente)"),
-        ("2. Contenedor 1 - App (20 pts)", "Dockerfile ejecutaba como root, sin optimización de variables de entorno ni metadatos de mantenimiento.", "Dockerfile con python:3.11-slim, usuario no-root 'appuser:appgroup', variables anti-buffer y metadatos LABEL.", "20 / 20 (Excelente)"),
-        ("3. Contenedor 2 - DB (15 pts)", "Variables de entorno sin valores por defecto seguros y sin healthcheck exhaustivo en Compose.", "PostgreSQL 16 sobre Alpine, volumen nombrado persistente 'db_data_volumen' y healthcheck activo (pg_isready).", "15 / 15 (Excelente)"),
-        ("4. Orquestación Compose (20 pts)", "NO definía red propia (usaba red default automática). Dependencia de .env sin plantilla provocaba fallos.", "Red bridge propia 'red_interna_proyecto', depends_on con condition: service_healthy y fallback seguro en variables.", "20 / 20 (Excelente)"),
-        ("5. Comunicación Inter-Contenedores (35 pts - Central)", "FALLA CRÍTICA: No había operación real de ida y vuelta. /health solo abría/cerraba socket sin hacer SELECT ni INSERT.", "Demostración real 100%: POST /api/items (escritura/INSERT persistente) y GET /api/items (lectura/SELECT), más UI web.", "35 / 35 (Excelente)"),
-        ("6. Buenas Prácticas y Seguridad (15 pts)", "NO existía .dockerignore, NO existía .env.example y contraseñas por defecto hardcodeadas en app.py ('admin123').", ".dockerignore exhaustivo, plantilla .env.example documentada, .env en .gitignore y cero secretos en código fuente.", "15 / 15 (Excelente)"),
-        ("7. Pipeline CI Actions (15 pts)", "TOTALMENTE AUSENTE: No existía carpeta .github/ ni ningún workflow de integración continua (0/15 pts).", "Pipeline completo en .github/workflows/ci.yml con 14 pasos automáticos que compila, despliega y prueba POST/GET. Estado: PASSING.", "15 / 15 (Excelente)"),
-        ("8. Documento Evidencias (15 pts)", "No existía documento PDF formal ni evidencias de consola ni bibliografía en formato APA.", "Informe técnico formal en PDF (y DOCX) con diagramas, capturas de consola, pruebas de red, conclusiones y normas APA 7.ª ed.", "15 / 15 (Excelente)"),
-        ("PUNTAJE TOTAL (150 Puntos)", "~80 / 150 pts (Calificación Básica / Riesgo de reprobación)", "150 / 150 pts (Cumplimiento total de todos los criterios al 100%)", "150 / 150 (Excelente)")
+        ("Criterio de Evaluación", "Estado en Repo Base (Qué Faltaba)", "Solución Implementada en Repo Final", "Estado de Cumplimiento"),
+        ("1. Repositorio GitHub", "Faltaban comandos independientes de build/run, descripción de variables y commits frecuentes atómicos.", "README exhaustivo de 297 líneas con diagramas, badges, guía paso a paso y 9+ commits semánticos atómicos.", "Cumplido (Excelente)"),
+        ("2. Contenedor 1 - App", "Dockerfile ejecutaba como root, sin optimización de variables de entorno ni metadatos de mantenimiento.", "Dockerfile con python:3.11-slim, usuario no-root 'appuser:appgroup', variables anti-buffer y metadatos LABEL.", "Cumplido (Excelente)"),
+        ("3. Contenedor 2 - DB", "Variables de entorno sin valores por defecto seguros y sin healthcheck exhaustivo en Compose.", "PostgreSQL 16 sobre Alpine, volumen nombrado persistente 'db_data_volumen' y healthcheck activo (pg_isready).", "Cumplido (Excelente)"),
+        ("4. Orquestación Compose", "NO definía red propia (usaba red default automática). Dependencia de .env sin plantilla provocaba fallos.", "Red bridge propia 'red_interna_proyecto', depends_on con condition: service_healthy y fallback seguro en variables.", "Cumplido (Excelente)"),
+        ("5. Comunicación Inter-Contenedores (Criterio Central)", "FALLA CRÍTICA: No había operación real de ida y vuelta. /health solo abría/cerraba socket sin hacer SELECT ni INSERT.", "Demostración real 100%: POST /api/items (escritura/INSERT persistente) y GET /api/items (lectura/SELECT), más UI web.", "Cumplido (Excelente)"),
+        ("6. Buenas Prácticas y Seguridad", "NO existía .dockerignore, NO existía .env.example y contraseñas por defecto hardcodeadas en app.py ('admin123').", ".dockerignore exhaustivo, plantilla .env.example documentada, .env en .gitignore y cero secretos en código fuente.", "Cumplido (Excelente)"),
+        ("7. Pipeline CI Actions", "TOTALMENTE AUSENTE: No existía carpeta .github/ ni ningún workflow de integración continua.", "Pipeline completo en .github/workflows/ci.yml con 14 pasos automáticos que compila, despliega y prueba POST/GET. Estado: PASSING.", "Cumplido (Excelente)"),
+        ("8. Documento Evidencias", "No existía documento PDF formal ni evidencias de consola ni bibliografía en formato APA.", "Informe técnico formal en PDF (y DOCX) con diagramas, capturas de consola, pruebas de red, conclusiones y normas APA 7.ª ed.", "Cumplido (Excelente)"),
+        ("BALANCE GENERAL", "Incompleto (Implementación base preliminar)", "Completo (Cumplimiento total de todos los requerimientos)", "Completado (Excelente)")
     ]
 
     t_audit = doc.add_table(rows=len(audit_data), cols=4)

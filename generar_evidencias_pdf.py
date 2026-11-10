@@ -263,7 +263,7 @@ def build_pdf(filename="Informe_Proyecto1_Docker_Escenario3.pdf"):
     story.append(HRFlowable(width="80%", thickness=2.5, color=c_primary, spaceBefore=0, spaceAfter=20))
     story.append(Paragraph("INFORME DE EVIDENCIAS TÉCNICAS:<br/>COMUNICACIÓN INTER-CONTENEDORES Y ORQUESTACIÓN CON DOCKER COMPOSE", title_cover_style))
     story.append(Spacer(1, 12))
-    story.append(Paragraph("Entrega Proyecto 1 - Escenario 3 (Evaluación sobre 150 Puntos)", subtitle_cover_style))
+    story.append(Paragraph("Entrega Proyecto 1 - Escenario 3", subtitle_cover_style))
     story.append(HRFlowable(width="80%", thickness=1, color=c_secondary, spaceBefore=20, spaceAfter=0))
 
     story.append(Spacer(1, 50))
@@ -309,7 +309,7 @@ def build_pdf(filename="Informe_Proyecto1_Docker_Escenario3.pdf"):
     story.append(Paragraph("• <b>Construir el Contenedor 1 (Aplicación):</b> Desarrollar un Dockerfile propio basado en una imagen oficial fijada (<code>python:3.11-slim</code>), con ejecución bajo usuario sin privilegios y puerto 5000 expuesto.", bullet_style))
     story.append(Paragraph("• <b>Configurar el Contenedor 2 (Base de Datos):</b> Desplegar un servicio de persistencia relacional con PostgreSQL 16 sobre Alpine Linux, parametrizado mediante variables de entorno y respaldado por un volumen nombrado.", bullet_style))
     story.append(Paragraph("• <b>Orquestar con Docker Compose:</b> Definir un archivo <code>docker-compose.yml</code> que declare los servicios, una red bridge propia, asignación de volúmenes, políticas de reinicio y dependencias con healthcheck.", bullet_style))
-    story.append(Paragraph("• <b>Demostrar la Comunicación Inter-Contenedor (35 pts):</b> Validar la resolución DNS interna por nombre de servicio (<code>db</code>) y efectuar operaciones reales de ida y vuelta (escritura POST y lectura GET).", bullet_style))
+    story.append(Paragraph("• <b>Demostrar la Comunicación Inter-Contenedor:</b> Validar la resolución DNS interna por nombre de servicio (<code>db</code>) y efectuar operaciones reales de ida y vuelta (escritura POST y lectura GET).", bullet_style))
     story.append(Paragraph("• <b>Aplicar Buenas Prácticas y Seguridad:</b> Emplear <code>.dockerignore</code>, excluir secretos en <code>.gitignore</code>, proveer <code>.env.example</code> y evitar secretos embebidos en el código fuente.", bullet_style))
     story.append(Paragraph("• <b>Integrar Pipeline de CI/CD:</b> Configurar GitHub Actions para validar sintaxis, construir imágenes y ejecutar pruebas automatizadas en cada push, manteniendo el pipeline en estado exitoso (verde).", bullet_style))
 
@@ -376,7 +376,7 @@ def build_pdf(filename="Informe_Proyecto1_Docker_Escenario3.pdf"):
     # =========================================================================
     # 4. IMPLEMENTACIÓN TÉCNICA Y COMUNICACIÓN INTER-CONTENEDORES (Página 3)
     # =========================================================================
-    story.append(Paragraph("3. Comunicación Inter-Contenedores y Resolución DNS (Criterio Central - 35 pts)", h1_style))
+    story.append(Paragraph("3. Comunicación Inter-Contenedores y Resolución DNS (Criterio Central)", h1_style))
     story.append(HRFlowable(width="100%", thickness=1, color=c_primary, spaceBefore=2, spaceAfter=8))
 
     story.append(Paragraph(
@@ -411,7 +411,7 @@ def build_pdf(filename="Informe_Proyecto1_Docker_Escenario3.pdf"):
     ))
 
     story.append(Spacer(1, 10))
-    story.append(Paragraph("4. Evidencias de Ejecución y Validación de Comandos (Puntos 2, 4, 5 y 8)", h1_style))
+    story.append(Paragraph("4. Evidencias de Ejecución y Validación de Comandos", h1_style))
     story.append(HRFlowable(width="100%", thickness=1, color=c_primary, spaceBefore=2, spaceAfter=8))
 
     # EVIDENCIA 1: docker build
@@ -570,10 +570,10 @@ los registros continúan existiendo, demostrando la separación entre el ciclo d
     # =========================================================================
     # 5. BUENAS PRÁCTICAS, SEGURIDAD Y CI/CD (Página 6)
     # =========================================================================
-    story.append(Paragraph("5. Buenas Prácticas y Seguridad (15 pts)", h1_style))
+    story.append(Paragraph("5. Buenas Prácticas y Seguridad", h1_style))
     story.append(HRFlowable(width="100%", thickness=1, color=c_primary, spaceBefore=2, spaceAfter=8))
 
-    story.append(Paragraph("En estricto cumplimiento del punto 6 de la rúbrica, se implementaron los siguientes estándares:", body_style))
+    story.append(Paragraph("En estricto cumplimiento de los estándares de ingeniería y seguridad, se implementaron las siguientes medidas:", body_style))
     story.append(Spacer(1, 4))
     story.append(Paragraph("• <b>Aislamiento de Secretos (.env / .env.example):</b> Ninguna credencial de producción se encuentra hardcodeada. El archivo <code>.env.example</code> sirve de guía pública, mientras que el archivo <code>.env</code> real está excluido en <code>.gitignore</code> para impedir fugas en GitHub.", bullet_style))
     story.append(Paragraph("• <b>Optimización de Contexto (.dockerignore):</b> Se filtran directorios como <code>.git</code>, archivos <code>.env</code>, entornos virtuales (<code>.venv</code>) y cachés de Python (<code>__pycache__</code>), reduciendo drásticamente la superficie de ataque y el tiempo de construcción.", bullet_style))
@@ -581,7 +581,7 @@ los registros continúan existiendo, demostrando la separación entre el ciclo d
     story.append(Paragraph("• <b>Fijación de Versiones:</b> No se utilizó la etiqueta ambigua <code>latest</code>. Se fijaron <code>python:3.11-slim</code> y <code>postgres:16-alpine</code> garantizando reproducibilidad determinista.", bullet_style))
 
     story.append(Spacer(1, 10))
-    story.append(Paragraph("6. Integración Continua con GitHub Actions (15 pts)", h1_style))
+    story.append(Paragraph("6. Integración Continua con GitHub Actions", h1_style))
     story.append(HRFlowable(width="100%", thickness=1, color=c_primary, spaceBefore=2, spaceAfter=8))
 
     story.append(Paragraph(
@@ -654,79 +654,79 @@ los registros continúan existiendo, demostrando la separación entre el ciclo d
     # =========================================================================
     # 7. MATRIZ DE AUDITORÍA Y NOTAS DE REQUISITOS (QUÉ FALTABA Y SOLUCIÓN)
     # =========================================================================
-    story.append(Paragraph("7. Matriz de Auditoría: Qué Faltaba en Repo Base y Solución Implementada (150 pts)", h1_style))
+    story.append(Paragraph("7. Matriz de Auditoría Técnica y Cumplimiento de Requisitos", h1_style))
     story.append(HRFlowable(width="100%", thickness=1, color=c_primary, spaceBefore=2, spaceAfter=8))
 
     story.append(Paragraph(
         "A continuación se presenta el balance técnico de auditoría realizado entre el repositorio base inicial ("
         "<code>proyecto-integracion-continua</code>) y la implementación final entregada ("
         "<code>docker-comunicacion-microservicios</code>). El proyecto base contenía omisiones críticas que habrían "
-        "reducido la calificación a nivel Básico (~80/150 pts), las cuales fueron subsanadas en su totalidad "
-        "para alcanzar el 100% de la rúbrica (150/150 pts - Nivel Excelente):",
+        "limitado la entrega a un nivel básico preliminar, las cuales fueron subsanadas en su totalidad "
+        "para alcanzar un estándar de implementación excelente y completo:",
         body_style
     ))
     story.append(Spacer(1, 6))
 
     audit_table_data = [
         [
-            Paragraph("Criterio y Ponderación", table_header_style),
+            Paragraph("Criterio de Evaluación", table_header_style),
             Paragraph("Estado en Repo Base (Qué Faltaba)", table_header_style),
             Paragraph("Solución Implementada en Repo Final", table_header_style),
-            Paragraph("Calificación", table_header_style)
+            Paragraph("Estado de Cumplimiento", table_header_style)
         ],
         [
-            Paragraph("<b>1. Repositorio GitHub</b><br/>(15 pts)", table_cell_bold),
+            Paragraph("<b>1. Repositorio GitHub</b>", table_cell_bold),
             Paragraph("Faltaban comandos independientes de build/run, descripción de variables y commits frecuentes atómicos (subido en bloque).", table_cell_style),
             Paragraph("README exhaustivo de 297 líneas con diagramas, badges, guía paso a paso y 9+ commits semánticos atómicos (feat, ci, docs, fix).", table_cell_style),
-            Paragraph("<b>15 / 15</b><br/>Excelente", table_cell_bold)
+            Paragraph("<b>Cumplido</b><br/>Excelente", table_cell_bold)
         ],
         [
-            Paragraph("<b>2. Contenedor 1 (App)</b><br/>(20 pts)", table_cell_bold),
+            Paragraph("<b>2. Contenedor 1 (App)</b>", table_cell_bold),
             Paragraph("Dockerfile ejecutaba como root, sin optimización de variables de entorno de Python ni metadatos de mantenimiento.", table_cell_style),
             Paragraph("Dockerfile con python:3.11-slim, usuario no-root <code>appuser:appgroup</code>, variables anti-buffer y metadatos LABEL.", table_cell_style),
-            Paragraph("<b>20 / 20</b><br/>Excelente", table_cell_bold)
+            Paragraph("<b>Cumplido</b><br/>Excelente", table_cell_bold)
         ],
         [
-            Paragraph("<b>3. Contenedor 2 (DB)</b><br/>(15 pts)", table_cell_bold),
+            Paragraph("<b>3. Contenedor 2 (DB)</b>", table_cell_bold),
             Paragraph("Variables de entorno sin valores por defecto seguros y sin healthcheck exhaustivo en Compose.", table_cell_style),
             Paragraph("PostgreSQL 16 sobre Alpine, volumen nombrado persistente <code>db_data_volumen</code> y healthcheck activo (pg_isready).", table_cell_style),
-            Paragraph("<b>15 / 15</b><br/>Excelente", table_cell_bold)
+            Paragraph("<b>Cumplido</b><br/>Excelente", table_cell_bold)
         ],
         [
-            Paragraph("<b>4. Orquestación Compose</b><br/>(20 pts)", table_cell_bold),
+            Paragraph("<b>4. Orquestación Compose</b>", table_cell_bold),
             Paragraph("<b>NO definía red propia</b> (usaba red default automática). Dependencia de .env sin plantilla provocaba fallo al levantar.", table_cell_style),
             Paragraph("Red bridge propia <code>red_interna_proyecto</code>, depends_on con condition: service_healthy y fallback seguro en variables.", table_cell_style),
-            Paragraph("<b>20 / 20</b><br/>Excelente", table_cell_bold)
+            Paragraph("<b>Cumplido</b><br/>Excelente", table_cell_bold)
         ],
         [
-            Paragraph("<b>5. Comunicación Inter-Contenedores</b><br/>(35 pts - Central)", table_cell_bold),
+            Paragraph("<b>5. Comunicación Inter-Contenedores</b><br/>(Criterio Central)", table_cell_bold),
             Paragraph("<b>FALLA CRÍTICA:</b> No había operación real de ida y vuelta. /health solo abría/cerraba socket sin hacer SELECT ni INSERT.", table_cell_style),
             Paragraph("Demostración real 100%: <code>POST /api/items</code> (escritura/INSERT persistente) y <code>GET /api/items</code> (lectura/SELECT), más UI web.", table_cell_style),
-            Paragraph("<b>35 / 35</b><br/>Excelente", table_cell_bold)
+            Paragraph("<b>Cumplido</b><br/>Excelente", table_cell_bold)
         ],
         [
-            Paragraph("<b>6. Buenas Prácticas y Seguridad</b><br/>(15 pts)", table_cell_bold),
+            Paragraph("<b>6. Buenas Prácticas y Seguridad</b>", table_cell_bold),
             Paragraph("<b>NO existía .dockerignore</b>, <b>NO existía .env.example</b> y contraseñas por defecto hardcodeadas en app.py ('admin123').", table_cell_style),
             Paragraph(".dockerignore exhaustivo, plantilla .env.example documentada, .env en .gitignore y cero secretos en código fuente.", table_cell_style),
-            Paragraph("<b>15 / 15</b><br/>Excelente", table_cell_bold)
+            Paragraph("<b>Cumplido</b><br/>Excelente", table_cell_bold)
         ],
         [
-            Paragraph("<b>7. Pipeline CI (Actions)</b><br/>(15 pts)", table_cell_bold),
-            Paragraph("<b>TOTALMENTE AUSENTE:</b> No existía carpeta .github/ ni ningún workflow de integración continua (0/15 pts).", table_cell_style),
+            Paragraph("<b>7. Pipeline CI (Actions)</b>", table_cell_bold),
+            Paragraph("<b>TOTALMENTE AUSENTE:</b> No existía carpeta .github/ ni ningún workflow de integración continua.", table_cell_style),
             Paragraph("Pipeline completo en <code>.github/workflows/ci.yml</code> con 14 pasos que compila, despliega y prueba POST/GET. Estado: PASSING.", table_cell_style),
-            Paragraph("<b>15 / 15</b><br/>Excelente", table_cell_bold)
+            Paragraph("<b>Cumplido</b><br/>Excelente", table_cell_bold)
         ],
         [
-            Paragraph("<b>8. Documento Evidencias</b><br/>(15 pts)", table_cell_bold),
+            Paragraph("<b>8. Documento Evidencias</b>", table_cell_bold),
             Paragraph("No existía documento PDF formal ni evidencias de consola ni bibliografía en formato APA.", table_cell_style),
             Paragraph("Informe técnico formal en PDF (y DOCX) con diagramas, terminales de consola, pruebas de red, conclusiones y normas APA 7.ª ed.", table_cell_style),
-            Paragraph("<b>15 / 15</b><br/>Excelente", table_cell_bold)
+            Paragraph("<b>Cumplido</b><br/>Excelente", table_cell_bold)
         ],
         [
-            Paragraph("<b>PUNTAJE TOTAL</b><br/><b>(150 Puntos)</b>", table_cell_bold),
-            Paragraph("<b>~80 / 150 pts</b> (Calificación Básica / Riesgo de reprobación)", table_cell_bold),
-            Paragraph("<b>150 / 150 pts</b> (Cumplimiento total de todos los criterios al 100%)", table_cell_bold),
-            Paragraph("<b>150 / 150</b><br/><b>Excelente (100%)</b>", table_cell_bold)
+            Paragraph("<b>BALANCE GENERAL</b>", table_cell_bold),
+            Paragraph("<b>Incompleto</b> (Implementación base preliminar)", table_cell_bold),
+            Paragraph("<b>Completo</b> (Cumplimiento total de todos los requerimientos técnicos)", table_cell_bold),
+            Paragraph("<b>Completado</b><br/><b>Excelente</b>", table_cell_bold)
         ]
     ]
 
