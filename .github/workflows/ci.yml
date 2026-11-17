@@ -15,10 +15,19 @@ jobs:
       - name: "1. Clonar el repositorio"
         uses: actions/checkout@v4
 
-      - name: "2. Configurar variables de entorno desde .env.example"
+      - name: "2. Configurar variables de entorno desde .env.example y GitHub Secrets"
+        env:
+          SECRET_DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
         run: |
           echo "Creando archivo .env a partir de .env.example..."
           cp .env.example .env
+          if [ -n "$SECRET_DB_PASSWORD" ]; then
+            echo "Inyectando DB_PASSWORD desde GitHub Secrets..."
+            sed -i "s/DB_PASSWORD=.*/DB_PASSWORD=$SECRET_DB_PASSWORD/" .env
+          else
+            echo "Asignando DB_PASSWORD segura para pruebas de CI..."
+            sed -i "s/DB_PASSWORD=.*/DB_PASSWORD=ci_testing_pass_2026/" .env
+          fi
 
       - name: "3. Validar sintaxis y configuración de Docker Compose"
         run: |

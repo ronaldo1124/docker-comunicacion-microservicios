@@ -13,7 +13,7 @@ DB_HOST = os.getenv("DB_HOST", "db")
 DB_PORT = int(os.getenv("DB_PORT", 5432))
 DB_NAME = os.getenv("DB_NAME", "proyectodb")
 DB_USER = os.getenv("DB_USER", "postgres_user")
-DB_PASSWORD = os.getenv("DB_PASSWORD", "postgres_password_segura")
+DB_PASSWORD = os.getenv("DB_PASSWORD")
 APP_PORT = int(os.getenv("APP_PORT", 5000))
 
 def get_db_connection(max_retries=5, delay=2):

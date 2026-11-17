@@ -139,10 +139,12 @@ El requerimiento central exige que el **Contenedor 1** se comunique con el **Con
 
 ## 🔒 Buenas Prácticas y Seguridad
 
-1. **Gestión de Secretos:**
-   - Se incluye un archivo `.env.example` en el repositorio con credenciales de muestra.
-   - El archivo `.env` real está estrictamente ignorado mediante `.gitignore` para evitar fugas de información sensible.
-   - En el código fuente (`main.py`) no hay contraseñas en texto plano; todo se recupera mediante `os.getenv()`.
+1. **Gestión Estricta de Secretos:**
+   - **Cero contraseñas en `docker-compose.yml`:** No existe ninguna contraseña escrita en el archivo Compose ni valores por defecto (`${DB_PASSWORD}`); todo se desacopla obligatoriamente hacia el archivo `.env`.
+   - **Cero contraseñas en código fuente (`main.py`):** La aplicación no incluye valores de respaldo ni secretos embebidos; todo se recupera estrictamente mediante `os.getenv()`.
+   - **Archivo `.env.example` de muestra:** Incluye la plantilla de configuración sin credenciales reales para orientar la parametrización.
+   - **Archivo `.env` protegido:** Ignorado estrictamente mediante `.gitignore` para garantizar que jamás se suba al repositorio.
+   - **Integración con GitHub Secrets:** En el pipeline de CI/CD (GitHub Actions), las contraseñas se administran de forma encriptada mediante `secrets.DB_PASSWORD`.
 2. **Contexto de Construcción Limpio:**
    - El archivo `.dockerignore` previene que archivos locales temporales (`.git`, `__pycache__`, `.env`, documentación) inflen la imagen de Docker.
 3. **Principio de Mínimo Privilegio:**

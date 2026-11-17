@@ -35,6 +35,10 @@ wheels/
 *.sqlite
 *.db
 
+# Documentos generados
+*.pdf
+*.docx
+
 # Editores y Sistema Operativo
 .vscode/
 .idea/

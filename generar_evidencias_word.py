@@ -1,3 +1,4 @@
+import os
 import sys
 import docx
 from docx import Document
@@ -17,7 +18,10 @@ def set_cell_margins(cell, top=100, bottom=100, left=150, right=150):
     tcMar = parse_xml(f'<w:tcMar {nsdecls("w")}><w:top w:w="{top}" w:type="dxa"/><w:bottom w:w="{bottom}" w:type="dxa"/><w:left w:w="{left}" w:type="dxa"/><w:right w:w="{right}" w:type="dxa"/></w:tcMar>')
     tcPr.append(tcMar)
 
-def create_word_report(output_filename="E:\\trabajosuni\\Informe_Proyecto1_Docker_Escenario3.docx"):
+def create_word_report(output_filename=None):
+    if output_filename is None:
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        output_filename = os.path.join(base_dir, "Informe_Proyecto1_Docker_Escenario3.docx")
     doc = Document()
 
     # Configurar márgenes a 1 pulgada (72 pt)
@@ -261,7 +265,7 @@ def create_word_report(output_filename="E:\\trabajosuni\\Informe_Proyecto1_Docke
 
     # 6. BUENAS PRÁCTICAS Y SEGURIDAD
     doc.add_heading(level=1).add_run("5. Buenas Prácticas y Seguridad").font.color.rgb = c_primary
-    doc.add_paragraph("• Aislamiento estricto de secretos (.env y .env.example): Ningún secreto o contraseña sensible está incrustado en el código fuente. El archivo .env real está excluido mediante .gitignore.", style='List Bullet')
+    doc.add_paragraph("• Aislamiento estricto de secretos (.env, docker-compose y GitHub Secrets): En docker-compose.yml no existe ninguna contraseña escrita en texto plano ni valores por defecto (${DB_PASSWORD}); las credenciales se leen exclusivamente del archivo .env (ignorado en .gitignore). En CI/CD, las contraseñas se gestionan de forma segura mediante GitHub Secrets.", style='List Bullet')
     doc.add_paragraph("• Contexto de construcción eficiente (.dockerignore): Se excluyen dependencias locales, entornos virtuales, logs y archivos temporales.", style='List Bullet')
     doc.add_paragraph("• Principio de menor privilegio: El contenedor de la aplicación se ejecuta con el usuario no-root 'appuser' perteneciente al grupo 'appgroup'.", style='List Bullet')
     doc.add_paragraph("• Determinismo de imágenes: Se fijaron las versiones oficiales python:3.11-slim y postgres:16-alpine, descartando 'latest'.", style='List Bullet')
@@ -378,7 +382,8 @@ def create_word_report(output_filename="E:\\trabajosuni\\Informe_Proyecto1_Docke
     print(f"[OK] Documento Word generado exitosamente: {output_filename}")
 
 if __name__ == "__main__":
-    out_file = "E:\\trabajosuni\\Informe_Proyecto1_Docker_Escenario3.docx"
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    out_file = os.path.join(base_dir, "Informe_Proyecto1_Docker_Escenario3.docx")
     if len(sys.argv) > 1:
         out_file = sys.argv[1]
     create_word_report(out_file)
