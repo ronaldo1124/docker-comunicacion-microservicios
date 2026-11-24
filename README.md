@@ -34,7 +34,6 @@
   - [Configuración del Job Pipeline y Disparador Poll SCM](#configuración-del-job-pipeline-y-disparador-poll-scm)
   - [Anatomía del Jenkinsfile Declarativo](#anatomía-del-jenkinsfile-declarativo)
   - [Suite de Pruebas Automatizadas con Pytest](#suite-de-pruebas-automatizadas-con-pytest)
-  - [Guía Oficial de Capturas de Pantalla](#guía-oficial-de-capturas-de-pantalla)
 - [Entrega 1: Comunicación Inter-Contenedores (Escenario 3)](#-entrega-1-comunicación-inter-contenedores-escenario-3)
   - [Detalle de los Contenedores del Negocio](#detalle-de-los-contenedores-del-negocio)
   - [Resolución DNS y Uso del Nombre 'db'](#resolución-dns-y-uso-del-nombre-db)
@@ -84,7 +83,6 @@ docker-comunicacion-microservicios/
 ├── .gitignore                         # Exclusión de archivos sensibles y temporales
 ├── docker-compose.jenkins.yml         # Orquestación del servidor Jenkins (DooD)
 ├── docker-compose.yml                 # Orquestación de app y base de datos PostgreSQL
-├── GUIA_CAPTURAS_PASO_A_PASO.md       # Guía detallada de capturas para la entrega
 ├── Jenkinsfile                        # Pipeline CI declarativo oficial (Entrega 2)
 ├── pytest.ini                         # Configuración para ejecución de Pytest
 └── README.md                          # Documentación integral del repositorio
@@ -258,11 +256,6 @@ Ubicada en [`app/tests/test_app.py`](app/tests/test_app.py) (y accesible desde l
 * `test_get_items_success`: Comprueba la consulta de registros (HTTP 200) y su serialización JSON.
 * `test_get_items_db_error`: Valida el control de excepciones de conexión a base de datos (HTTP 500).
 * `test_live_database_roundtrip_if_available`: Prueba de integración real que efectúa INSERT y SELECT en el contenedor `db` cuando está disponible en la red Docker.
-
-### Guía Oficial de Capturas de Pantalla
-
-Para cumplir con el criterio de mayor ponderación de la rúbrica (evidencias paso a paso del build fallido y corregido, plugins, historial y pruebas), consulta el documento oficial:
-👉 **[GUIA_CAPTURAS_PASO_A_PASO.md](GUIA_CAPTURAS_PASO_A_PASO.md)**
 
 ---
 
