@@ -1,0 +1,48 @@
+# ==============================================================================
+# Orquestación de Jenkins con Docker Compose - Entrega Proyecto 2
+# Docker-out-of-Docker (DooD) mediante montaje de /var/run/docker.sock
+# Institución Universitaria Politécnico Grancolombiano
+# ==============================================================================
+
+services:
+  # ----------------------------------------------------------------------------
+  # Servidor Jenkins Controller (CI/CD)
+  # ----------------------------------------------------------------------------
+  jenkins:
+    build:
+      context: ./jenkins
+      dockerfile: Dockerfile
+    container_name: jenkins_server
+    restart: unless-stopped
+    # Se ejecuta con permisos de root para garantizar la comunicación fluida con
+    # el socket del demonio Docker del host (/var/run/docker.sock) sin conflictos de GID.
+    user: root
+    ports:
+      - "8080:8080"      # Interfaz Web de Jenkins
+      - "50000:50000"    # Puerto de agentes JNLP
+    environment:
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - JAVA_OPTS=-Djenkins.install.runSetupWizard=true
+    volumes:
+      # Persistencia de configuración, jobs, credenciales y plugins de Jenkins
+      - jenkins_home:/var/jenkins_home
+      # Montaje del socket de Docker del Host para habilitar Docker-out-of-Docker
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - jenkins_network
+
+# ------------------------------------------------------------------------------
+# Red propia para el entorno de Jenkins
+# ------------------------------------------------------------------------------
+networks:
+  jenkins_network:
+    name: jenkins_network
+    driver: bridge
+
+# ------------------------------------------------------------------------------
+# Volumen persistente para datos de Jenkins
+# ------------------------------------------------------------------------------
+volumes:
+  jenkins_home:
+    name: jenkins_home_data
+    driver: local

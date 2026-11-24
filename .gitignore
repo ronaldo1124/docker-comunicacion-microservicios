@@ -38,6 +38,7 @@ wheels/
 # Documentos generados
 *.pdf
 *.docx
+.pytest_cache/
 
 # Editores y Sistema Operativo
 .vscode/

@@ -25,8 +25,9 @@ COPY requirements.txt .
 # Instalar dependencias oficiales sin almacenar caché de pip
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copiar el código fuente de la aplicación
+# Copiar el código fuente de la aplicación y la suite de pruebas
 COPY src/ ./src/
+COPY tests/ ./tests/
 
 # Asignar permisos al usuario no root
 RUN chown -R appuser:appgroup /app
